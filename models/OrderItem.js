@@ -5,23 +5,31 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false,
     },
+
     amount: {
       type: Sequelize.INTEGER,
       allowNull: false
     },
-    totalAmount: {
-      type: Sequelize.INTEGER,
-      allowNull: false
-    }
+
+    // productId:{
+    //   type: Sequelize.INTEGER,
+    //   allowNull: false
+    // }
+
   });
 
   OrderItems.associate = (models) => {
-    OrderItems.belongsTo(models.Product, {
+    OrderItems.belongsTo(models.Order, {
       foreignKey: {
-        name: 'productId',
+        name: 'OrderId',
         allowNull: false
-      },
-    });
+    }}),
+      OrderItems.belongsTo(models.Product, {
+        foreignKey: {
+          name: 'productId',
+          allowNull: false
+        }
+    })
   };
 
   return OrderItems;

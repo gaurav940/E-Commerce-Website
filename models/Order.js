@@ -1,29 +1,39 @@
 'use strict';
+
+const OrderItem = require("./OrderItem");
+
 module.exports = (sequelize, Sequelize) => {
   const Order = sequelize.define("Order", {
-    qty: {
-      type: Sequelize.INTEGER,
-      //primaryKey: true,
-      allowNull: false,
-    },
-    amount: {
-      type: Sequelize.INTEGER,
-      allowNull: false
-    },
+    // amount: {
+    //   type: Sequelize.INTEGER,
+    //   allowNull: false
+    // },
     totalAmount: {
       type: Sequelize.INTEGER,
       allowNull: false
     }
   });
 
+  // Order.associate = (models) => {
+  //   Order.belongsTo(models.Cart, {
+  //     foreignKey: {
+  //       name: 'cartId',
+  //       allowNull: false
+  //     },
+  //   });
+  // };
+
   Order.associate = (models) => {
-    Order.belongsTo(models.Product, {
-      foreignKey: {
-        name: 'productId',
-        allowNull: false
-      },
-    });
-  };
+     Order.hasMany(models.OrderItem,{
+       foreignKey : {
+         name:'OrderId',
+         allowNull:false
+       }, 
+       as: 'OrderItems'
+     })
+  }
+
+
 
   return Order;
 };

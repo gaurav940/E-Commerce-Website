@@ -1,12 +1,6 @@
 'use strict';
 module.exports = (sequelize, Sequelize) => {
   const Product = sequelize.define("Product", {
-    // id: {
-    //   type: Sequelize.INTEGER,
-    //   primaryKey: true,
-    //   allowNull: false,
-    //   autoIncrement: true
-    // },
     name: {
       type: Sequelize.STRING,
       allowNull: false,
@@ -21,18 +15,24 @@ module.exports = (sequelize, Sequelize) => {
       type: Sequelize.INTEGER,
       allowNull: false
     }
-  },
-  { timestamps: false}
+  }
+  // { timestamps: false}
 );
 
   Product.associate = (models) => {
     Product.belongsTo(models.Brand, {
       foreignKey: 'brandId',
+      // allowNull: false
     });
     Product.belongsTo(models.Category, {
       foreignKey: 'categoryId',
+      // allowNull : false
     });
-  };
+    Product.hasMany(models.Spect, {
+      foreignKey: 'productId',
+      // allowNull:false
+    });
+    }
 
 
   return Product;

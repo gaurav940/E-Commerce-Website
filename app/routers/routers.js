@@ -1,6 +1,6 @@
 const db = require("../../models/index.js");
 
-const Op = db.Sequelize.Op;
+// const Op = db.Sequelize.Op;
 
 
 exports.create = (createValues, model) => {
@@ -14,6 +14,11 @@ exports.create = (createValues, model) => {
   const Model = db[model];
   return Model.create(createValues);
 
+ };
+
+ exports.bulkcreate = ( createValues, model) => {
+   const Model =db[model];
+   return Model.bulkCreate(createValues);
  };
 
 exports.findOne = (values, model) => {
@@ -33,23 +38,10 @@ exports.findOne = (values, model) => {
 };
 
   exports.findAll = ( values, model) => {
-
     const Model = db[model];
     return Model.findAll(values);
-//   const brand = req.query.brand;
-//   let condition = brand ? { brand: { [Op.iLike]: `%${brand}%` } } : null;
-//
-//   Brand.findAll({ where: condition })
-    // .then(data => {
-    //   res.send(data);
-    // })
-    // .catch(err => {
-    //   res.status(500).send({
-    //     message:
-    //       err.message || "Some error occurred while retrieving brand."
-    //   });
-    // });
-};
+    
+  };
 
 exports.findByPk = ( values, model) => {
   const Model = db[model];

@@ -3,6 +3,8 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const app = express();
 const db = require("./models");
+
+ const Op= db.Sequelize.Op;
 const brand = require("./app/routers/routers.js");
 const route = require("./routes/routes.js");
 db.sequelize.sync();
